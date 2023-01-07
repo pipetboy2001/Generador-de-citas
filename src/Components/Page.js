@@ -8,6 +8,8 @@ const Page = ({ authors, quotes, quote, author }) => {
     const getRandomQuote = () => {
         console.log("Mostrar otra cita aleatoria");
         setSelectedAuthor(null);
+        window.location.reload();
+
     };
 
     const AllQuotes = () => {
