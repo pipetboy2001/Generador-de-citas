@@ -1,0 +1,76 @@
+.container {
+    padding: 20px;
+    background-color: #045;
+    color: #fff;
+    height: 100%;
+    width: 100%;
+    display:grid;
+}
+
+.container h2 {
+    text-align: center;
+    color: rgb(255, 255, 255);
+}
+
+.quoteContainer {
+    width: 75%;
+    background: #fff;
+    padding: 10px;
+    margin: 0 auto;
+    text-align: center;
+    height: 70%;
+}
+
+.buttonContainer {
+    width: 100%;
+    text-align: center;
+}
+
+.quoteButton {
+    width: 40%;
+    margin-top: 10px;
+    border: 2px solid #46b8da;
+    color: rgb(255, 255, 255);
+    font-family: inherit;
+    font-weight: bold;
+    padding: 5px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.quoteButton:hover {
+    cursor: pointer;
+    background: #09c;
+    color: #fff;
+}
+
+.quoteButton:active {
+    cursor: pointer;
+}
+
+.quoteButton {
+    display: inline-block;
+}
+
+.quoteGenius {
+    font-style: italic;
+    font-weight: 600;
+    text-align: center;
+}
+
+p{
+    font-size: 1.5em;
+    font-weight: 600;
+    text-align: center;
+    color: black;
+}
+
+
+/*MEDIA QUERIES*/
+@media screen and(max-width:760px) {
+
+    .quoteButton,
+    .addNew {
+        display: block;
+    }
+}

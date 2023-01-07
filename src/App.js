@@ -1,7 +1,9 @@
+import { Page } from './Components/Page'
 
 function App() {
   return (
-    <h1>Hola</h1>
+    
+    <Page/>
 
   );
 }
