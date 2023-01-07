@@ -1,28 +1,29 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import Page from './Page';
 
-const QuoteDisplay = () => {
+const QuoteDisplay = ({ authors, quotes }) => {
     const [quote, setQuote] = useState(null);
+    const [author, setAuthor] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await axios.get('https://type.fit/api/quotes');
+            const result = await axios.get("https://type.fit/api/quotes");
             const randomIndex = Math.floor(Math.random() * result.data.length);
-            setQuote(result.data[randomIndex]);
+            setQuote(result.data[randomIndex].text);
+            setAuthor(result.data[randomIndex].author);
         };
         fetchData();
     }, []);
 
     return (
         <div className="quote-display">
-            {quote && (
-                <div className="quote" key={quote.text}>
-                    <p className="quote-text">{quote.text}</p>
-                    <p className="quote-author">- {quote.author}</p>
-                </div>
+            {quote && author && (
+                <Page authors={authors} quotes={quotes} quote={quote} author={author} />
             )}
         </div>
     );
 };
+
 
 export default QuoteDisplay;

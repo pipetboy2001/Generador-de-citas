@@ -1,11 +1,12 @@
-import { Page } from './Components/Page'
+import React from 'react';
+import QuoteDisplay from './Components/Quote';
 
-function App() {
+const App = () => {
   return (
-    
-    <Page/>
-
+    <div>
+      <QuoteDisplay />
+    </div>
   );
-}
+};
 
 export default App;
