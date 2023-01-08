@@ -6,8 +6,7 @@ const Page = () => {
     const [quotes, setQuotes] = useState(null);
     const [selectedAuthor, setSelectedAuthor] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const [randomIndex, setRandomIndex] = useState(1);
-
+    const [randomIndex, setRandomIndex] = useState(0);
 
     const fetchQuotes = async () => {
         const result = await axios.get('https://type.fit/api/quotes');
@@ -22,19 +21,41 @@ const Page = () => {
     useEffect(() => {
         if (quotes) {
             const randomIndex = Math.floor(Math.random() * quotes.length);
+            setRandomIndex(randomIndex);
             setSelectedAuthor(null);
         }
     }, [quotes]);
+
 
     const showAllQuotes = (author) => {
         setSelectedAuthor(author);
     };
 
+    const showRandomQuote = () => {
+        if (quotes) {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            setRandomIndex(randomIndex);
+            setSelectedAuthor(null);
+        }
+    };
+
     return (
         <div className="container">
-            <h2>Obtenga su cita diaria</h2>
+            <h2>get your daily quote</h2>
             {isLoading ? (
-                <p>Loading...</p>
+                <>
+                    <div className="quoteContainer">
+                        <div className="quoteText">
+                            <p className="quoteText">
+                                Loading...
+                            </p>
+                        </div>
+                        <p className="quoteAuthor">
+                            Loading...
+                        </p>
+                    </div>
+                    
+                </>
             ) : (
                 <div>
                     {selectedAuthor ? (
@@ -67,7 +88,7 @@ const Page = () => {
                 </div>
             )}
             <div className="buttonContainer">
-                <a className="quoteButton" onClick={() => setSelectedAuthor(null)}>Ver otra cita</a>
+                <a className="quoteButton" onClick={showRandomQuote}>Ver otra cita</a>
             </div>
         </div>
     );
