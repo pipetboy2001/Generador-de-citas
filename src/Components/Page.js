@@ -3,53 +3,71 @@ import axios from 'axios';
 import '../Styles/Page.css'
 
 const Page = () => {
-    const [quote, setQuote] = useState(null);
+    const [quotes, setQuotes] = useState(null);
     const [selectedAuthor, setSelectedAuthor] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [randomIndex, setRandomIndex] = useState(1);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const result = await axios.get('https://type.fit/api/quotes');
-            const quotes = result.data;
-            if (selectedAuthor) {
-                const filteredQuotes = quotes.filter(q => q.author === selectedAuthor);
-                setQuote(filteredQuotes[Math.floor(Math.random() * filteredQuotes.length)]);
-            } else {
-                setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
-            }
-        };
-        fetchData();
-    }, [selectedAuthor]);
 
-    const getRandomQuote = () => {
-        //Recarga la pagina
-        window.location.reload();
+    const fetchQuotes = async () => {
+        const result = await axios.get('https://type.fit/api/quotes');
+        setQuotes(result.data);
+        setIsLoading(false);
     };
 
-    const showAllQuotes = () => {
-        setSelectedAuthor(quote.author);
-        window.location.reload();
+    useEffect(() => {
+        fetchQuotes();
+    }, []);
+
+    useEffect(() => {
+        if (quotes) {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            setSelectedAuthor(null);
+        }
+    }, [quotes]);
+
+    const showAllQuotes = (author) => {
+        setSelectedAuthor(author);
     };
 
     return (
         <div className="container">
             <h2>Obtenga su cita diaria</h2>
-            {quote && (
-                <div className="quoteContainer">
-                    <div className="quoteText">
-                        <p className="quoteText">
-                            {quote.text}
-                        </p>
-                    </div>
-                    <p className="quoteAuthor">
-                        <button className="quoteAuthor" onClick={showAllQuotes}>
-                            {quote.author}
-                        </button>
-                    </p>
+            {isLoading ? (
+                <p>Loading...</p>
+            ) : (
+                <div>
+                    {selectedAuthor ? (
+                        quotes.filter(q => q.author === selectedAuthor).map(quote => (
+                            <div className="quoteContainer" key={quote.id}>
+                                <div className="quoteText">
+                                    <p className="quoteText">
+                                        {quote.text}
+                                    </p>
+                                </div>
+                                <p className="quoteAuthor">
+                                    {quote.author}
+                                </p>
+                            </div>
+                        ))
+                    ) : (
+                        <div className="quoteContainer">
+                            <div className="quoteText">
+                                <p className="quoteText">
+                                    {quotes[randomIndex].text}
+                                </p>
+                            </div>
+                            <p className="quoteAuthor">
+                                <button className="quoteAuthor" onClick={() => showAllQuotes(quotes[randomIndex].author)}>
+                                    {quotes[randomIndex].author}
+                                </button>
+                            </p>
+                        </div>
+                    )}
                 </div>
-            )
-            }
+            )}
             <div className="buttonContainer">
-                <a className="quoteButton" onClick={getRandomQuote}>Otra cita</a>
+                <a className="quoteButton" onClick={() => setSelectedAuthor(null)}>Ver otra cita</a>
             </div>
         </div>
     );
