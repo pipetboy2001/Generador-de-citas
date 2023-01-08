@@ -1,45 +1,58 @@
-import React, { useState } from 'react'
-import AuthorQuotes from './AuthorQuotes';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import '../Styles/Page.css'
 
-const Page = ({ authors, quotes, quote, author }) => {
+const Page = () => {
+    const [quote, setQuote] = useState(null);
     const [selectedAuthor, setSelectedAuthor] = useState(null);
 
-    const getRandomQuote = () => {
-        console.log("Mostrar otra cita aleatoria");
-        setSelectedAuthor(null);
-        window.location.reload();
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await axios.get('https://type.fit/api/quotes');
+            const quotes = result.data;
+            if (selectedAuthor) {
+                const filteredQuotes = quotes.filter(q => q.author === selectedAuthor);
+                setQuote(filteredQuotes[Math.floor(Math.random() * filteredQuotes.length)]);
+            } else {
+                setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
+            }
+        };
+        fetchData();
+    }, [selectedAuthor]);
 
+    const getRandomQuote = () => {
+        //Recarga la pagina
+        window.location.reload();
     };
 
-    const AllQuotes = () => {
-        console.log("Mostrar todas las citas de este autor");
-        setSelectedAuthor(author);
+    const showAllQuotes = () => {
+        setSelectedAuthor(quote.author);
+        window.location.reload();
     };
 
     return (
         <div className="container">
             <h2>Obtenga su cita diaria</h2>
-            <div className="quoteContainer">
-                <div className="quoteText">
-                    {selectedAuthor ? (
-                        <AuthorQuotes author={selectedAuthor} authors={authors} quotes={quotes} />
-                    ) : (
-                        <p className="quoteText">{quote}</p>
-                    )}
+            {quote && (
+                <div className="quoteContainer">
+                    <div className="quoteText">
+                        <p className="quoteText">
+                            {quote.text}
+                        </p>
+                    </div>
+                    <p className="quoteAuthor">
+                        <button className="quoteAuthor" onClick={showAllQuotes}>
+                            {quote.author}
+                        </button>
+                    </p>
                 </div>
-                <p className="quoteAuthor">
-                    <button className="quoteAuthor" onClick={AllQuotes}>
-                        {author}
-                    </button>
-                    
-                </p>
-            </div>
+            )
+            }
             <div className="buttonContainer">
                 <a className="quoteButton" onClick={getRandomQuote}>Otra cita</a>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Page;

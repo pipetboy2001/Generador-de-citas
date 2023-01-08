@@ -1,10 +1,10 @@
 import React from 'react';
-import QuoteDisplay from './Components/Quote';
+import Page from './Components/Page'
 
 const App = () => {
   return (
     <div>
-      <QuoteDisplay />
+      <Page />
     </div>
   );
 };
