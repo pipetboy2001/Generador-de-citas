@@ -5,6 +5,7 @@ import '../Styles/Page.css'
 const Page = () => {
 
     const [quotes, setQuotes] = useState(null);
+    const [gender, setGender] = useState(null);
     const [selectedAuthor, setSelectedAuthor] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [randomIndex, setRandomIndex] = useState(0);
@@ -15,6 +16,7 @@ const Page = () => {
     const fetchQuotes = async () => {
         const result = await axios.get('https://type.fit/api/quotes');
         setQuotes(result.data);
+        setGender(result.data.gender);
         setIsLoading(false);
     };
 
@@ -54,7 +56,6 @@ const Page = () => {
 
     /*
     * Muestra una cita aleatoria y establece el autor seleccionado en "null".
-    *
     * @param {array} quotes - Lista de citas.
     * @param {function} setRandomIndex - Función que establece el índice aleatorio en el estado de la aplicación.
     * @param {function} setSelectedAuthor - Función que establece el autor seleccionado en el estado de la aplicación.
@@ -67,6 +68,8 @@ const Page = () => {
             setSelectedAuthor(null);
         }
     };
+
+    //mostrar el genero de la cita
 
     return (
         <div className="container">
@@ -109,7 +112,7 @@ const Page = () => {
                             </div>
                             <p className="quoteAuthor">
                                 <button className="quoteAuthor" value='All Quotes' onClick={() => showAllQuotes(quotes[randomIndex].author)}>
-                                    {quotes[randomIndex].author}
+                                            {quotes[randomIndex].author} - ({quotes.gender || 'gender unknown'})
                                 </button>
                             </p>
                         </div>
