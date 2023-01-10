@@ -69,7 +69,16 @@
     color: black;
     font-size: 110%;
     cursor: pointer;
+}
 
+.quoteCategory{
+    text-align: right;
+    font-style: italic;
+    margin: 0;
+    padding: 0;
+    color: black;
+    font-size: 110%;
+    cursor: pointer;
 }
 
 
