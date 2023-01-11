@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
+import AuthorQuotes from './AuthorQuotes';
 import '../Styles/Page.css'
 
 const Page = () => {
     const [quote, setQuote] = useState(null);
     const [category, setCategory] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [showQuotesByAuthor, setShowQuotesByAuthor] = useState(false);
 
     /*
     * Obtiene una lista de citas de una API externa y establece el estado de la aplicación en la lista de citas obtenidas.
@@ -19,7 +21,7 @@ const Page = () => {
         const data = await response.json();
         setCategory(data.quote.tags);
         return data.quote;
-    }; 
+    };
     /*
     * useeffect que se encarga de obtener las citas de la API cuando se carga la página.
     * @param {function} fetchQuotes - Función que obtiene las citas de la API.
@@ -37,7 +39,7 @@ const Page = () => {
     * @param { string } author - Nombre del autor cuyas citas se deben mostrar.
     * @returns { undefined }
     */
-    const showQuotesByAuthor = async (author) => {
+    const handleShowQuotesByAuthor = async (author) => {
         const response = await fetch(`https://favqs.com/api/quotes/?filter=${author}&type=author`, {
             method: 'GET',
             headers: {
@@ -46,6 +48,7 @@ const Page = () => {
         })
         const data = await response.json()
         setQuote(data.quotes)
+        setShowQuotesByAuthor(true)
     }
 
     const showRandomQuote = async () => {
@@ -62,7 +65,7 @@ const Page = () => {
 
 
 
-   return(
+    return (
         <div className="container">
             <h2>Get your daily quote</h2>
             {isLoading ? (
@@ -75,22 +78,22 @@ const Page = () => {
             ) : (
                 <div className="quoteContainer">
                     <div className="quoteText">
+                        {/* citas */}
                         <p className="quoteText">"{quote.body}"</p>
+                        {showQuotesByAuthor && <AuthorQuotes quotes={quote} />}
                     </div>
                     {/* autor */}
                     <p className="quoteAuthor">- {quote.author}</p>
-                       {/* Categoría */}
-                       <p className="quoteCategory">Category: {category.join(", ")}</p>
+                    {/* Categoría */}
+                    <p className="quoteCategory">Category: {category[0]}</p>
                 </div>
             )}
 
-           {/* Boton para ver todas las citas del autor */}
-           <div className="buttonContainer">
-               <a className="quoteButton" onClick={() => showQuotesByAuthor(quote.author)}>See all quotes by {quote.author}</a>
-           </div>
-
             {/* Boton para pedir otra cita */}
             <div className="buttonContainer">
+                {/* Boton para ver todas las citas del autor */}
+                <a className="quoteButton" onClick={() => handleShowQuotesByAuthor(quote.author)}>See all quotes</a>
+
                 <a className="quoteButton" onClick={showRandomQuote}>See another quote</a>
             </div>
         </div>
