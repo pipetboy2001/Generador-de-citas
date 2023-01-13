@@ -2,18 +2,18 @@
       <h1> <img src="/public/logo192.png" width="80px"><br/>quote generator </h1></div>
 
 <div align="center">
-   solución para el  challenge de una aplicación que genere citas a la zar<a href="http://devchallenges.io" target="_blank">Devchallenges.io</a>.
+   solución para el  challenge de una aplicación que genere citas a la zar <a href="http://devchallenges.io" target="_blank">Devchallenges.io</a>.
 </div>
 
 ## Descripción
 
 <div align="center">
   <h3>
-    <a href="">
+    <a href="https://quote-pipetboy.vercel.app/">
       Demo
     </a>
     <span> | </span>
-    <a href="">
+    <a href="https://devchallenges.io/challenges/8Y3J4ucAMQpSnYTwwWW8">
       Challenge
     </a>
   </h3>
@@ -28,13 +28,17 @@
 
 ## Características
 
+- Puedo ver una cita aleatoria
+- genero una nueva cita aleatoria
+- cuando selecciono el autor de la cita, puedo ver una lista de citas de ellos
+- Puedo ver el género de citas debajo del autor
 
 ## Como Instalar de manera Local
 Para clonar y ejecutar esta aplicación, necesitará [Git](https://git-scm.com) y [Node.js](https://nodejs.org/en/download/) (que viene con [ npm](http://npmjs.com)) instalado en su computadora. Desde su línea de comando:
 
 ```bash
 # Clone this repository
-$ git clone 
+$ git clone https://github.com/pipetboy2001/Generador-de-citas
 
 # Install dependencies
 $ npm install
@@ -43,4 +47,4 @@ $ npm install
 $ npm start
 ```
 ## Mi experencia en este challange
-Fue una experiencia muy buena ya que me permitió aprender a mejor los componentes ahora filtrando entre ellos. Me gustó mucho el diseño del proyecto y la forma en que se puede interactuar con la aplicación. Me gustaría seguir mejorando este proyecto y agregarle más funcionalidades.
+Fue una experiencia bastante estresante en el uso de la API pues el desafio me llevaba a https://pprathameshmore.github.io/QuoteGarden/ ,logrando obtener los datos de esta pero no su uso para obtener el genero lo cual me llevo a buscar una API similar y rehacer codigo para obtener el genero y cumplir con todas las caracteristicas solicitadas , en primer caso quiero dejar mi estilo de website aunque lo mas posible que retome el proyecto para dejarlo con el estilo que el desafio te coloca 
