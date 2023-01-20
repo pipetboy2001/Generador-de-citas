@@ -1,94 +1,47 @@
-.container {
-    background-color: #045;
-    color: #fff;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.container h2 {
-    text-align: center;
-    color: rgb(255, 255, 255);
-}
-/* Contenedor de la cita */
-.quoteContainer {
-    width: 75%;
-    background: #fff;
-    padding: 10px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-/*Contenedor que contiene el boton*/
-.buttonContainer {
-    width: 100%;
-    text-align: center;
-}
-
-/* Boton citame */
-.quoteButton {
-    width: 40%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: 2px solid #46b8da;
-    color: rgb(255, 255, 255);
-    font-family: inherit;
-    font-weight: bold;
-    padding: 5px;
-    text-decoration: none;
-    text-align: center;
-}
-.quoteButton:hover {
-    cursor: pointer;
-    background: #09c;
-    color: #fff;
-}
-.quoteButton:active {
-    cursor: pointer;
-}
-
-.quoteButton {
-    display: inline-block;
-}
-
-.quoteText{
+.Quote{
+    font-family: "Times New Roman", Times, serif;
     font-size: 1.2em;
+    font-style: italic;
     font-weight: bold;
-    margin: 0;
-    padding: 0;
+    color: #000000;
     text-align: center;
-    font-style: oblique;
-    color: black;
+    background-color: #f3f3f3;
+    margin-left: 10%;
+    margin-right: 10%;
+    border-left: 5px solid #f7df94;
 }
 
-.quoteAuthor{
-    text-align: right;
-    font-style: italic;
-    margin: 0;
-    padding: 0;
-    color: black;
-    font-size: 110%;
+.NewQuote {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+    margin: 0%;
+    border-color: #f3f3f3;
+}
+
+.Information {
+    
+    color: #333333;
+    background-color: #ffffff;
+    margin-left: 20%;
+    margin-right: 20%;
     cursor: pointer;
+    position: relative;
 }
 
-.quoteCategory{
-    text-align: right;
-    font-style: italic;
-    margin: 0;
-    padding: 0;
-    color: black;
-    font-size: 110%;
-    cursor: pointer;
+.Information:hover {
+    color: #ffffff;
+    background-color: #000000;
 }
 
+.Author{
+    font-weight: bold;
+}
 
-
-
-/*MEDIA QUERIES*/
-@media screen and(max-width:760px) {
-
-    .quoteButton,
-    .addNew {
-        display: block;
-    }
+.icon-right {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
 }
