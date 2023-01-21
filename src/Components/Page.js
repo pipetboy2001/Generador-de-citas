@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { TfiReload } from 'react-icons/tfi';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import AllQuote from './AllQuote';
+import { BsFillChatQuoteFill } from 'react-icons/bs';
 
 import '../Styles/Page.css';
 
@@ -17,6 +18,7 @@ const Page = () => {
             .then((response) => response.json())
             .then((quote) => setQuote(quote));
         setIsLoading(false);
+        setShowAllQuotes(false);
     }
     useEffect(() => {
         getNewQuote();
@@ -32,7 +34,7 @@ const Page = () => {
     return (
         <div className="container">
             <center>
-                <h1 >Random Anime Quote</h1>
+                <h1 >Random Anime Quote <BsFillChatQuoteFill/></h1>
             </center>
             {/* Boton para pedir otra cita */}
             <div >
